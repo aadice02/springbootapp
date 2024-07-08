@@ -57,7 +57,7 @@ jobs:
           path: target
 
       - name: Build Docker image
-        run: docker build -t "683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app .
+        run: docker build -t "683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app" .
 
       - name: Install and configure AWS CLI
         run: |
