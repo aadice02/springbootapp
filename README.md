@@ -3,7 +3,8 @@ spring boot app infra with deploy on eks using github action
 
 Here are the screenshot for the successful implementation :
 
-![image](https://github.com/aadice02/springbootapp/assets/42316673/ac0637b7-2d03-4a36-9358-eee24f7da8f5)
+![image](https://github.com/aadice02/springbootapp/assets/42316673/d4b6311a-eb07-4350-b789-eba250fb0848)
+
 
 
 Spring boot app build :
