@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: 683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

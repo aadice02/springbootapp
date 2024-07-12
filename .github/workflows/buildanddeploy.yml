@@ -77,15 +77,23 @@ jobs:
           docker tag 683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app:latest 683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app:${GITHUB_SHA}
           docker push 683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app:${GITHUB_SHA}
 
-      - name: Deploy to EKS
+          #      - name: Deploy to EKS
+          #run: |
+          #aws eks update-kubeconfig --region us-east-1 --name terraform-eks
+          #mkdir -p k8s
+          #export ECR_REPOSITORY_URL="683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app:${GITHUB_SHA}"
+          #envsubst < k8s-deployment.yaml > k8s/k8s-deployment.yaml
+          #echo "resources:" > k8s/kustomization.yaml
+          #echo "- k8s-deployment.yaml" >> k8s/kustomization.yaml
+          #kubectl kustomize k8s | kubectl apply -f - --force
+   
+      - name: Deploy to EKS using Helm
         run: |
           aws eks update-kubeconfig --region us-east-1 --name terraform-eks
-          mkdir -p k8s
           export ECR_REPOSITORY_URL="683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app:${GITHUB_SHA}"
-          envsubst < k8s-deployment.yaml > k8s/k8s-deployment.yaml
-          echo "resources:" > k8s/kustomization.yaml
-          echo "- k8s-deployment.yaml" >> k8s/kustomization.yaml
-          kubectl kustomize k8s | kubectl apply -f - --force
-
+          helm repo add stable https://charts.helm.sh/stable
+          helm repo update
+          helm upgrade --install my-spring-boot-app ./ demo-app-helm --set image.tag=${GITHUB_SHA}
+    
 
 
