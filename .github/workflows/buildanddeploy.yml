@@ -27,8 +27,32 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: Build and test with Maven
-      run: mvn --batch-mode --update-snapshots --no-transfer-progress clean package
+        #  - name: Build and test with Maven
+        #run: mvn --batch-mode --update-snapshots --no-transfer-progress clean package
+
+    - name: Build and scan with SonarCloud
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        mvn clean verify sonar:sonar \
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+          -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+    - name: Quality Gate
+      id: sonar-quality-gate
+      run: |
+        status=$(curl -s -u ${{ secrets.SONAR_TOKEN }} "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status')
+        echo "Quality gate status: $status"
+        echo "::set-output name=status::$status"
+        
+    - name: Fail if quality gate fails
+      if: steps.sonar-quality-gate.outputs.status != 'OK'
+      run: |
+        echo "Quality gate failed"
+        exit 1
+
 
     - name: Upload JAR file
       uses: actions/upload-artifact@v2
