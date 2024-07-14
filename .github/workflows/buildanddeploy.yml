@@ -35,6 +35,15 @@ jobs:
         name: app-jar
         path: target/*.jar
 
+    - name: Print SonarCloud Environment Variables
+      run: |
+        echo "SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}"
+        echo "SONAR_ORG: ${{ secrets.SONAR_ORG }}"
+        echo "SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}"
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       with:
