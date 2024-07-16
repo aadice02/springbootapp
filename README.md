@@ -23,3 +23,9 @@ Resource provision through Terraform :
 Helm Deployment :
 
 ![image](https://github.com/user-attachments/assets/e67f90f8-9a70-4409-b87e-a2cde0fd22c8)
+
+
+Git Leaks Scan :
+
+![image](https://github.com/user-attachments/assets/a4563a11-257b-4eb2-bc8d-f33754e1b320)
+
