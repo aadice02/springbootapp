@@ -43,7 +43,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=sonar_abhi_test
-            -Dsonar.projectKey=springbootapp
+            -Dsonar.project=springbootapp
             -Dsonar.verbose=true    
 
       - name: Secret scan with Gitleaks
