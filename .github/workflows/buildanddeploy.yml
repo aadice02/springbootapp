@@ -43,7 +43,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=sonar_abhi_test
-            -Dsonar.projectkey=sonar-abhi-test
+            -Dsonar.projectKey=sonar-abhi-test
             -Dsonar.project=springbootapp
             -Dsonar.verbose=true    
 
