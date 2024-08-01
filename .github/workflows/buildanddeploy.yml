@@ -96,5 +96,5 @@ jobs:
           export ECR_REPOSITORY_URL="683512555361.dkr.ecr.us-east-1.amazonaws.com/my-spring-boot-app:${GITHUB_SHA}"
           helm repo add stable https://charts.helm.sh/stable
           helm repo update
-          helm upgrade --install my-spring-boot-app ./ demo-app-helm --set image.tag=${GITHUB_SHA}
+          helm upgrade --install my-spring-boot-app ./demo-app-helm --set image.tag=${GITHUB_SHA}
 
