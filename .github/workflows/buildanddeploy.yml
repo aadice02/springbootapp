@@ -36,6 +36,16 @@ jobs:
           name: app-jar
           path: target/*.jar
 
+      - name: Analyze with SonarCloud
+        uses: sonarsource/sonarcloud-github-action@v2.3.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=sonar_abhi_test
+            -Dsonar.projectKey=sonar-abhi-test
+            -Dsonar.verbose=true    
+
       - name: Secret scan with Gitleaks
         uses: zricethezav/gitleaks-action@v1
         with:
